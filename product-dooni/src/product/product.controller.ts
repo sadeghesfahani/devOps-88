@@ -5,8 +5,8 @@ import { ProductService } from './product.service';
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
-  @Get('/delete-product')
-  deleteProduct() {
-    return 'product deleted';
+  @Get('/update-product')
+  updateProduct() {
+    return 'product updated successfully';
   }
 }
