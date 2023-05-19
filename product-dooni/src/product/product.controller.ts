@@ -9,4 +9,9 @@ export class ProductController {
   updateProduct() {
     return 'product updated successfully';
   }
+
+  @Get('/delete-product')
+  deleteProduct() {
+    return 'product deleted successfully';
+  }
 }
