@@ -1,0 +1,50 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build and start containers') {
+            steps {
+                script {
+                    sh 'cd product-dooni && sudo docker-compose -p new_instance up --build -d'
+                }
+            }
+        }
+
+        stage('Run tests') {
+            steps {
+                script {
+                    // Test commands
+                    sh 'sudo docker exec new_instance-nestjs-1 npm run test'
+                }
+            }
+        }
+
+        stage('Cleanup old instance and rename new instance') {
+            when {
+                // This stage will only be executed when previous stages are successful
+                expression { currentBuild.resultIsBetterOrEqualTo('SUCCESS') }
+            }
+            steps {
+                script {
+                    // Tear down the old instance
+                    // Rename the new instance
+                    sh 'cd product-dooni && sudo docker-compose -p new_instance down && sudo docker-compose up --build -d'
+                }
+            }
+        }
+
+        stage('Cleanup new instance if tests failed') {
+            when {
+                // This stage will only be executed when previous stages are not successful
+                expression { currentBuild.result != 'SUCCESS' }
+            }
+            steps {
+                script {
+                    // Tear down the new instance
+                    sh 'cd product-dooni'
+                    sh 'sudo docker-compose -p new_instance down'
+                }
+            }
+        }
+    }
+}

@@ -9,3 +9,29 @@ services:
     ports:
       - "2030:3000"
     command: npm run start:dev
+    environment:
+      - MODE=development
+      - LOG_LEVEL=INFO
+
+
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+
+#  db:
+#    image: postgres:12
+#    container_name: db
+#    environment:
+#      - PG_DATA=/var/lib/postgresql/notification-data
+#      - POSTGRES_PASSWORD=asdfsaf
+#      - POSTGRES_USER=adsfasdf
+#      - POSTGRES_DB=asdfasdf
+#    ports:
+#      - "5470:5432"
+#    volumes:
+#      - sina:/var/lib/postgresql/data
+#
+#
+#volumes:
+#  sina:
