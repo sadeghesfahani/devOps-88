@@ -3,6 +3,7 @@ import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {
+
   constructor(private readonly productService: UserService) {}
 
   @Get('/update-user')
@@ -10,3 +11,12 @@ export class UserController {
     return 'user updated successfully';
   }
 }
+
+
+
+  @Get('/createUser')
+  createUser() {
+    return 'user created successfully';
+  }
+}
+
