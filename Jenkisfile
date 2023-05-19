@@ -5,7 +5,7 @@ pipeline {
         stage('Build and start containers') {
             steps {
                 script {
-                    sh 'cd product-dooni && sudo docker-compose -f docker-compose-test -p new_instance up --build -d'
+                    sh 'cd product-dooni && sudo docker-compose -f docker-compose-test.yml -p new_instance up --build -d'
                 }
             }
         }
