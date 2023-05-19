@@ -2,7 +2,6 @@ import { Controller, Get } from '@nestjs/common';
 
 @Controller('product')
 export class ProductController {
-
   @Get('/update-product')
   updateProduct() {
     return 'product updated successfully';
@@ -10,7 +9,7 @@ export class ProductController {
   @Get('/create-product')
   createProduct() {
     return 'product created successfully';
-
+  }
   @Get('/delete-product')
   deleteProduct() {
     return 'product deleted successfully';
