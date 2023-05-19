@@ -5,7 +5,7 @@ pipeline {
         stage('Build and start containers') {
             steps {
                 script {
-                    sh 'cd product-dooni && sudo docker-compose -p new_instance up --build -d'
+                    sh 'cd product-dooni && sudo docker-compose -f docker-compose-test -p new_instance up --build -d'
                 }
             }
         }
@@ -28,7 +28,8 @@ pipeline {
                 script {
                     // Tear down the old instance
                     // Rename the new instance
-                    sh 'cd product-dooni && sudo docker-compose -p new_instance down && sudo docker-compose up --build -d'
+                    sh 'cd product-dooni && sudo docker-compose -p new_instance down && sudo docker-compose down'
+                    sh 'cd product-dooni && sudo docker-compose up'
                 }
             }
         }
